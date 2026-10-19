@@ -22,11 +22,13 @@ test_destination_index = get_traveler_location(test_traveler)
 # attractions using list comprehension
 attractions = [[] for i in range(5)]
 
+# Creating a function to easily add attraction in destination
 def add_attraction(destination, attraction):
     destination_index = get_destination_index(destination)
     attractions_for_destination = attractions[destination_index]
     attractions_for_destination.append(attraction)
 
+# Adding attraction to each destination location
 add_attraction("Los Angeles, USA", ['Venice Beach', ['beach']])
 add_attraction("Paris, France", ["the Louvre", ["art", "museum"]])
 add_attraction("Paris, France", ["Arc de Triomphe", ["historical site", "monument"]])
@@ -39,4 +41,18 @@ add_attraction("São Paulo, Brazil", ["Pátio do Colégio", ["historical site"]]
 add_attraction("Cairo, Egypt", ["Pyramids of Giza", ["monument", "historical site"]])
 add_attraction("Cairo, Egypt", ["Egyptian Museum", ["museum"]])
 
-print(attractions)
+def find_attraction(destination, interests):
+    destination_index = get_destination_index(destination)
+    attractions_in_city = attractions[destination_index]
+    attractions_with_interest = []
+    for attraction in attractions_in_city:
+        attraction_tags = attraction[1]
+        for interest in interests:
+            if interest in attraction_tags:
+                attractions_with_interest.append(attraction[0])
+
+    return attractions_with_interest
+
+la_arts = find_attraction("Los Angeles, USA", ['art'])
+
+print(la_arts)
